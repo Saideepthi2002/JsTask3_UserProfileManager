@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #main_div{
+            display: flex;
+            height: 10vh;
+            width: 40vw;
+            justify-content: space-around;
+            /* background-color: aqua; */
+        }
+        button{
+            height: 10vh;
+            width: 10vw;
+            background-color:azure;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>User Profile Manager</h1>
+    <div id="main_div">
+    <div class="bt"><button id="add_user" onclick="add_new_user()">Add New User</button></div>
+    <div class="bt"><button id="show_user" onclick="show_users()">Show Users</button></div>
+    <div class="bt"><button id="clear_user" onclick="clear_users()">Clear Users</button></div>
+    <!-- <ul id="ord_list"></ul> -->
+    </div>
+    <ul id="ord_list"></ul>
+    <script>
+      let users = [];
+      let btn1 = document.getElementById("add_user");
+      let btn2 = document.getElementById("show_user");
+      let btn3 = document.getElementById("clear_user");
+
+      function add_new_user() {
+        let user_name = prompt("Enter the user name:");
+        let email = prompt("Enter the user email:");
+        const obj = {
+          id: users.length + 1,
+          name: user_name.trim().toUpperCase(),
+          gmail: email.trim().toLowerCase() + "@gmail.com",
+        };
+        users.push(obj);
+        alert("User Added SUccesfully!!!");
+        // console.log(users);
+        list_Update()
+      }
+
+      function list_Update() {
+        let ord_list = document.getElementById("ord_list");
+        ord_list.innerHTML=''
+        users.forEach((ele) => {
+          let li = document.createElement("li");
+          li.innerHTML = `${ele.id},${ele.name},${ele.gmail}`;
+          ord_list.appendChild(li);
+        });
+      }
+
+      function show_users(){
+        console.log(users)
+        alert('Users printed in the console')
+      }
+      function clear_users(){
+        alert('All users cleared')
+        users=[]
+        list_Update()
+      }
+    </script>
+  </body>
+</html>
